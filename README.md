@@ -71,3 +71,25 @@ The final output is exported as a GeoJSON file for visualization in QGIS.
 6. Would changing the dominance threshold alter spatial patterns?
 
 - Yes. Changing the dominance threshold alter the spatial pattern of the result from performing classification to the overlay input. Changing the dominance threshold will change the number of rows in the overlay dataframe that will be filtered in the classification operation. This will in turn change the overall geometry of the output of the classification.
+
+### Challenge Exercise
+
+1. What spatial question did you choose?
+
+- I choose Option 3 — Small but Dense Residential Fragments.
+
+2. What algorithmic steps did you design?
+
+- For the challenge I performed the following steps
+  - Load parcel and landuse data into GeoDataFrames
+  - Reproject data to EPSG:3395 for area calculations
+  - Calculate parcel area
+  - Perform intersection overlay between parcel and landuse
+  - Calculate landuse area and percentage of the overlay result
+  - Perform classification by filtering the name property to residential, percentage property to less than 30 and total_area property to greater than 500
+  - Transform data back to 4326
+  - Save the geojson file
+
+3. How does your logic differ from the guided example?
+
+- The logic of my challenge script has a different filter parameters when filtering the overlay dataframe for data that satisfied the conditions of the challenge option. The other steps are the same as the guided example.
