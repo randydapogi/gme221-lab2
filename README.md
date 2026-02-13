@@ -45,3 +45,29 @@ The final output is exported as a GeoJSON file for visualization in QGIS.
 3. How does this relate to the “Input / Process / Output” structure of GIS algorithms discussed in Lecture 3?
 
 - In this case, we treat the PostGIS data as the input of our GIS algorithm. We treat the python script that reads the PostGIS data and performs calculations and analysis as the Process of the GIS algorithm and we treat the output generated from the python script as the output.
+
+### Process Reflection Milestone
+
+1. Why CRS transformation is necessary before area computation?
+
+- The parcel and landuse data we loaded from the PostGIS was in 4326 projection based on the print statement we performed. The EPSG:4326 projection is in degrees. To calculate the area of the geometry in meters we need to transform the projection from degrees to meters that is why we reprojected the parcel and landuse data to EPSG:3395 since this projection is in meters.
+
+2. How does CRS choice affect area accuracy?
+
+- Since CRS accuracy is optimized to be accurate to a certain region of the earth surface, CRS choice can affect the area accuracy calculation with accuracy dependent on the distance of the geometry in question to the optimized region of the CRS of choice.
+
+3. Does the overlay create new spatial units that did not previously exist?
+
+- In our analysis.py script, the overlay operatation created new geometry that are the intersections between the parcels and landuse.
+
+4. Why classification is considered part of the analysis process?
+
+- Classification is part of the analysis process because it performs an operation that transforms the output of the analysis process.
+
+5. Is classification sensitive to sliver geometries or topology errors?
+
+- In our example, classification is not sensitive to sliver geometries and topology errors since it performs its classification operation on each row of the input data independent of the geometry of the other rows in the input data.
+
+6. Would changing the dominance threshold alter spatial patterns?
+
+- Yes. Changing the dominance threshold alter the spatial pattern of the result from performing classification to the overlay input. Changing the dominance threshold will change the number of rows in the overlay dataframe that will be filtered in the classification operation. This will in turn change the overall geometry of the output of the classification.
